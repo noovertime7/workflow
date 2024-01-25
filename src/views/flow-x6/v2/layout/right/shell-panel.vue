@@ -49,13 +49,13 @@
             @delete="deleteShellEnv"
           />
           <div class="add-shell-env" @click="addShellEnv">
-            <i class="el-icon-button-add" />
+            <el-icon><Plus /></el-icon>
             添加环境变量
           </div>
         </div>
       </el-form-item>
       <el-form-item label="脚本" class="script-container">
-        <el-input type="textarea" placeholder="请输入shell脚本" v-model="form.script" />
+        <el-input type="textarea" placeholder="请输入shell脚本 #!开头" v-model="form.script" />
       </el-form-item>
 <!--      <div class="cache-item">-->
 <!--        <div class="cache-label">-->
@@ -106,9 +106,10 @@ import { defineComponent, onMounted, PropType, ref } from 'vue';
 import { Shell } from '../../model/data/node/shell';
 import ShellEnv from './form/shell-env.vue';
 import { v4 as uuidv4 } from 'uuid';
+import {Plus} from "@element-plus/icons-vue";
 
 export default defineComponent({
-  components: { ShellEnv },
+  components: {Plus, ShellEnv },
   props: {
     nodeData: {
       type: Object as PropType<Shell>,
