@@ -20,10 +20,12 @@
 <!--        />-->
         <shell-panel
             v-if="nodeData.getType() === 'shell'"
-            :caches="workflowData.global.caches"
             :node-data="nodeData"
             @form-created="handleFormCreated"
         />
+        <delay_time  v-if="nodeData.getType() === NodeTypeEnum.DelayTime"
+                     :node-data="nodeData"
+                     @form-created="handleFormCreated" />
 <!--        <async-task-panel-->
 <!--            v-else-if="nodeData.getType() === NodeTypeEnum.ASYNC_TASK"-->
 <!--            :caches="workflowData.global.caches"-->
@@ -42,10 +44,17 @@ import ShellPanel from './shell-panel.vue';
 import { Graph, Node } from '@antv/x6';
 import { CustomX6NodeProxy } from '../../model/data/custom-x6-node-proxy';
 import { IWorkflow } from '../../model/data/common';
+import { NodeTypeEnum } from '../../model/data/enumeration';
 import CronPanel from "./cron-panel.vue";
+import Delay_time from "./delay_time.vue";
 
 export default defineComponent({
-  components: {CronPanel,  ShellPanel},
+  computed: {
+    NodeTypeEnum() {
+      return NodeTypeEnum
+    }
+  },
+  components: {Delay_time, CronPanel,  ShellPanel},
   props: {
     nodeId: {
       type: String,
