@@ -14,4 +14,6 @@
 yarn install
 ## 启动
 npm run dev
+##
+访问 http://127.0.0.1:3000
 ```
