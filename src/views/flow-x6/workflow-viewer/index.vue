@@ -34,6 +34,7 @@
       @node-click="clickNode"
       @mouseleave="destroyNodeToolbar"
     />
+    <div v-show="!dslMode" class="canvas" ref="container" />
   </div>
 </template>
 
@@ -53,8 +54,8 @@ import G6 from '@antv/g6';
 import TaskState from './task-state.vue';
 import Toolbar from './toolbar.vue';
 import NodeToolbar from './node-toolbar.vue';
-import { ITaskExecutionRecordVo } from '../../../api/dto/workflow-execution-record';
-import { DslTypeEnum, TaskStatusEnum, TriggerTypeEnum } from '../../../api/dto/enumeration';
+import { ITaskExecutionRecordVo } from '@/api/dto/workflow-execution-record';
+import { DslTypeEnum, TaskStatusEnum, TriggerTypeEnum } from '@/api/dto/enumeration';
 import { GraphDirectionEnum, GraphTypeEnum, NodeToolbarTabTypeEnum, NodeTypeEnum } from './model/data/enumeration';
 import { INodeMouseoverEvent } from './model/data/common';
 import { sortTasks } from './model/util';
@@ -133,9 +134,13 @@ export default defineComponent({
           container.value as HTMLElement,
           direction,
         );
+
+        console.log(" workflowGraph.value = ", workflowGraph.value)
         graph.value = workflowGraph.value!.graph;
 
         updateZoom();
+
+
       }
 
       if (!nodeActionConfigured.value) {

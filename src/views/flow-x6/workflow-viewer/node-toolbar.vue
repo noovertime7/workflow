@@ -1,16 +1,16 @@
 <template>
-  <div class="jm-workflow-viewer-node-toolbar" ref="toolbar">
+  <div class="el-workflow-viewer-node-toolbar" ref="toolbar">
     <template v-if="!operationVisible">
       <div class="mask">
-        <jm-tooltip v-if="tips" placement="bottom" :appendToBody="false">
+        <el-tooltip v-if="tips" placement="bottom" :appendToBody="false">
           <template #content>
             <div style="white-space: nowrap" v-html="tips" />
           </template>
           <div class="tooltip-section"></div>
-        </jm-tooltip>
+        </el-tooltip>
       </div>
     </template>
-    <jm-popover
+    <el-popover
       v-else-if="popoverVisible"
       :append-to-body="false"
       :offset="0"
@@ -20,23 +20,23 @@
     >
       <template #reference>
         <div class="mask">
-          <jm-tooltip v-if="tips" placement="bottom" :appendToBody="false">
+          <el-tooltip v-if="tips" placement="bottom" :appendToBody="false">
             <template #content>
               <div style="white-space: nowrap" v-html="tips" />
             </template>
             <div class="tooltip-section"></div>
-          </jm-tooltip>
+          </el-tooltip>
         </div>
       </template>
       <div class="operation">
         <template v-if="status === TaskStatusEnum.SUSPENDED">
-          <jm-popconfirm
+          <el-popconfirm
             title="确定要重试吗？"
-            icon="jm-icon-warning"
+            icon="el-icon-warning"
             confirmButtonText="确定"
             cancelButtonText="取消"
-            confirmButtonIcon="jm-icon-button-confirm"
-            cancelButtonIcon="jm-icon-button-cancel"
+            confirmButtonIcon="el-icon-button-confirm"
+            cancelButtonIcon="el-icon-button-cancel"
             @confirm="handleClick(NodeToolbarTabTypeEnum.RETRY)"
             :append-to-body="false"
             :offset="7"
@@ -47,15 +47,15 @@
                 <div class="txt">重试</div>
               </div>
             </template>
-          </jm-popconfirm>
+          </el-popconfirm>
           <div class="separator"></div>
-          <jm-popconfirm
+          <el-popconfirm
             title="确定要忽略吗？"
-            icon="jm-icon-warning"
+            icon="el-icon-warning"
             confirmButtonText="确定"
             cancelButtonText="取消"
-            confirmButtonIcon="jm-icon-button-confirm"
-            cancelButtonIcon="jm-icon-button-cancel"
+            confirmButtonIcon="el-icon-button-confirm"
+            cancelButtonIcon="el-icon-button-cancel"
             @confirm="handleClick(NodeToolbarTabTypeEnum.IGNORE)"
             :append-to-body="false"
             :offset="7"
@@ -66,7 +66,7 @@
                 <div class="txt">忽略</div>
               </div>
             </template>
-          </jm-popconfirm>
+          </el-popconfirm>
           <div class="separator"></div>
         </template>
         <div class="item" @click="handleClick(NodeToolbarTabTypeEnum.LOG)">
@@ -84,7 +84,7 @@
           <div class="txt">缓存</div>
         </div>
       </div>
-    </jm-popover>
+    </el-popover>
   </div>
 </template>
 
@@ -93,7 +93,7 @@ import { computed, defineComponent, nextTick, onMounted, onUpdated, PropType, re
 import { INodeMouseoverEvent } from './model/data/common';
 import { MAX_LABEL_LENGTH } from './model/dsl/g6';
 import { GraphTypeEnum, NodeToolbarTabTypeEnum, NodeTypeEnum } from './model/data/enumeration';
-import { TaskStatusEnum } from '../../../api/dto/enumeration';
+import { TaskStatusEnum } from '@/api/dto/enumeration';
 
 export default defineComponent({
   props: {
@@ -196,7 +196,7 @@ export default defineComponent({
 </script>
 
 <style scoped lang="less">
-.jm-workflow-viewer-node-toolbar {
+.el-workflow-viewer-node-toolbar {
   position: fixed;
   z-index: 1;
 

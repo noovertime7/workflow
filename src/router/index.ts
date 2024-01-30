@@ -4,8 +4,8 @@ export type AppRouteRecordRaw = RouteRecordRaw & {
   hidden?: boolean,
   children?: AppRouteRecordRaw[]
 }
-import graphPanel from '../views/flow-x6/v2/index.vue'
-
+import graphPanel from '../views/flow-x6/workflow-editor/index.vue'
+import view from '../views/flow-x6/view.vue'
 const router = createRouter({
   history: createWebHashHistory(),
   routes: [
@@ -13,6 +13,11 @@ const router = createRouter({
       path: '/',
       name: 'index',
       component: graphPanel
+    },
+    {
+      path: '/view',
+      name: 'view',
+      component: view
     },
   ] as AppRouteRecordRaw[]
 })

@@ -26,6 +26,10 @@
         <delay_time  v-if="nodeData.getType() === NodeTypeEnum.DelayTime"
                      :node-data="nodeData"
                      @form-created="handleFormCreated" />
+
+        <notifications  v-if="nodeData.getType() === NodeTypeEnum.Notifications"
+                     :node-data="nodeData"
+                     @form-created="handleFormCreated" />
 <!--        <async-task-panel-->
 <!--            v-else-if="nodeData.getType() === NodeTypeEnum.ASYNC_TASK"-->
 <!--            :caches="workflowData.global.caches"-->
@@ -47,6 +51,7 @@ import { IWorkflow } from '../../model/data/common';
 import { NodeTypeEnum } from '../../model/data/enumeration';
 import CronPanel from "./cron-panel.vue";
 import Delay_time from "./delay_time.vue";
+import Notifications from "./notifications.vue";
 
 export default defineComponent({
   computed: {
@@ -54,7 +59,7 @@ export default defineComponent({
       return NodeTypeEnum
     }
   },
-  components: {Delay_time, CronPanel,  ShellPanel},
+  components: {Notifications, Delay_time, CronPanel,  ShellPanel},
   props: {
     nodeId: {
       type: String,

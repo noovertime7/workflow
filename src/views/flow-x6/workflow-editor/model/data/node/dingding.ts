@@ -1,6 +1,6 @@
 import {isValidCronExpression} from 'cron-expression-validator';
 import {BaseNode} from './base-node';
-import {NodeRefEnum, NodeTypeEnum} from '../enumeration';
+import {FailureModeEnum, NodeRefEnum, NodeTypeEnum} from '../enumeration';
 import icon from '../../../svgs/shape/dingding.svg';
 import {CustomRule} from '../common';
 
@@ -8,12 +8,13 @@ export class Notifications extends BaseNode {
     host: string;
     user: string;
     password: string;
-
-    constructor(name: string = '通知', host: string = '', user: string = '', password: string = '') {
+    failureMode: FailureModeEnum;
+    constructor(name: string = '通知', host: string = '', user: string = '', password: string = '',failureMode: FailureModeEnum = FailureModeEnum.SUSPEND) {
         super(NodeRefEnum.Notifications, name, NodeTypeEnum.Notifications, icon, 'https://v2.jianmu.dev/guide/cron.html');
         this.host = host;
         this.user = user;
         this.password = password;
+        this.failureMode = failureMode;
     }
 
     static build({name, host, user, password}: any): Notifications {
@@ -33,11 +34,12 @@ export class Notifications extends BaseNode {
     }
 
     toDsl(): object {
-        const {host, user, password, name} = this;
+        const {host, user, password, name,failureMode} = this;
 
         return {
             type: NodeTypeEnum.Notifications,
-            name,
+            'on-failure': failureMode === FailureModeEnum.SUSPEND ? undefined : failureMode,
+            alias: name,
             host,
             user,
             password,
